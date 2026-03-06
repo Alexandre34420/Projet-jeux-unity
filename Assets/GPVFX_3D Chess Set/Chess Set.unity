@@ -1142,6 +1142,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 674388826}
+  - component: {fileID: 674388828}
+  - component: {fileID: 674388827}
   m_Layer: 0
   m_Name: '[BLACK]'
   m_TagString: Untagged
@@ -1164,6 +1166,36 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1739977966}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &674388827
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 674388825}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c07bb1120fd2f064c9ee91e33a130af7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: '::'
+  tileSize: 1
+  boardOrigin: {x: 0, y: 0, z: 0}
+--- !u!114 &674388828
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 674388825}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e57ab11e54ad8ca42a9a8f8477863b8c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ChessPiece
+  color: 1
+  type: 0
+  boardX: 0
+  boardY: 0
 --- !u!1 &676905280 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 100000, guid: 9c7ba5185d28d475b902a82911b83e2c, type: 3}
@@ -1282,7 +1314,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!81 &690222309
 AudioListener:
   m_ObjectHideFlags: 0
@@ -1565,7 +1597,7 @@ GameObject:
   - component: {fileID: 821334999}
   m_Layer: 0
   m_Name: Camera_TopDown
-  m_TagString: Untagged
+  m_TagString: MainCamera
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1595,7 +1627,7 @@ Camera:
   m_GameObject: {fileID: 821334993}
   m_Enabled: 1
   serializedVersion: 2
-  m_ClearFlags: 4
+  m_ClearFlags: 1
   m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
@@ -1620,7 +1652,7 @@ Camera:
   near clip plane: 0.3
   far clip plane: 1000
   field of view: 60
-  orthographic: 1
+  orthographic: 0
   orthographic size: 6.87
   m_Depth: 0
   m_CullingMask:
@@ -1628,7 +1660,7 @@ Camera:
     m_Bits: 4294967295
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
-  m_TargetDisplay: 1
+  m_TargetDisplay: 0
   m_TargetEye: 3
   m_HDR: 1
   m_AllowMSAA: 1
@@ -1645,13 +1677,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 821334993}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 4.5, y: 11.5, z: 4.5}
+  m_LocalRotation: {x: 0.55478084, y: -0, z: -0, w: 0.8319966}
+  m_LocalPosition: {x: 4.5, y: 12.12, z: -0.92}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 67.391, y: 0, z: 0}
 --- !u!114 &821334999
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1705,6 +1737,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 844257173}
+  - component: {fileID: 844257174}
+  - component: {fileID: 844257175}
   m_Layer: 0
   m_Name: '{WHITE}'
   m_TagString: Untagged
@@ -1727,6 +1761,36 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1739977966}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &844257174
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 844257172}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e57ab11e54ad8ca42a9a8f8477863b8c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ChessPiece
+  color: 0
+  type: 0
+  boardX: 0
+  boardY: 0
+--- !u!114 &844257175
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 844257172}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c07bb1120fd2f064c9ee91e33a130af7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlacePieces
+  tileSize: 1
+  boardOrigin: {x: 0, y: 0, z: 0}
 --- !u!1 &848056671 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 100000, guid: dab6c0dea21994386a57acc588faa9e5, type: 3}
