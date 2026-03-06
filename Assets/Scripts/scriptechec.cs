@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 
 public enum PieceColor { White, Black }
 public enum PieceType { Pawn, Rook, Knight, Bishop, Queen, King }
@@ -15,6 +15,6 @@ public class ChessPiece : MonoBehaviour
     {
         boardX = x;
         boardY = y;
-        transform.position = new Vector3(x, 0, y); // Y=0 pour un plateau à plat
+        transform.position = new Vector3(x, 0, y);
     }
 }

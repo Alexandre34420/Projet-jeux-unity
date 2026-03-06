@@ -12,7 +12,8 @@ public class ChessGameManager : MonoBehaviour
 
     void Start()
     {
-        ChessPiece[] pieces = FindObjectsOfType<ChessPiece>();
+        // Remplacé FindObjectsOfType obsolète par FindObjectsByType pour supprimer l'avertissement CS0618
+        ChessPiece[] pieces = UnityEngine.Object.FindObjectsByType<ChessPiece>(FindObjectsSortMode.None);
 
         foreach (ChessPiece p in pieces)
         {
@@ -25,7 +26,10 @@ public class ChessGameManager : MonoBehaviour
     {
         if (!Input.GetMouseButtonDown(0)) return;
 
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        Camera cam = Camera.main;
+        if (cam == null) return;
+
+        Ray ray = cam.ScreenPointToRay(Input.mousePosition);
         if (!Physics.Raycast(ray, out RaycastHit hit, 100f)) return;
 
         // Clic sur une pièce
@@ -105,7 +109,6 @@ public class ChessGameManager : MonoBehaviour
         return false;
     }
 
-
     private bool PawnMove(ChessPiece piece, int x, int y)
     {
         int dir = (piece.color == PieceColor.White) ? 1 : -1;
@@ -113,6 +116,17 @@ public class ChessGameManager : MonoBehaviour
         // Avance simple d'une case (doit être vide)
         if (x == piece.boardX && y == piece.boardY + dir && board[x, y] == null)
             return true;
+
+        // Avance de deux cases depuis la position de départ (cases doivent être vides)
+        bool isWhiteStart = piece.color == PieceColor.White && piece.boardY == 1;
+        bool isBlackStart = piece.color == PieceColor.Black && piece.boardY == 6;
+        if (x == piece.boardX && y == piece.boardY + 2 * dir &&
+            (isWhiteStart || isBlackStart))
+        {
+            int midY = piece.boardY + dir;
+            if (board[x, midY] == null && board[x, y] == null)
+                return true;
+        }
 
         // Capture diagonale (case occupée par une pièce adverse)
         if (Mathf.Abs(x - piece.boardX) == 1 &&
@@ -129,7 +143,19 @@ public class ChessGameManager : MonoBehaviour
         // Doit rester sur la même ligne ou la même colonne
         if (x != piece.boardX && y != piece.boardY) return false;
 
-        // TODO plus tard : vérifier qu'aucune pièce ne bloque le chemin
+        // Vérifier qu'aucune pièce ne bloque le chemin
+        int stepX = x == piece.boardX ? 0 : (x > piece.boardX ? 1 : -1);
+        int stepY = y == piece.boardY ? 0 : (y > piece.boardY ? 1 : -1);
+
+        int cx = piece.boardX + stepX;
+        int cy = piece.boardY + stepY;
+        while (cx != x || cy != y)
+        {
+            if (board[cx, cy] != null) return false;
+            cx += stepX;
+            cy += stepY;
+        }
+
         return true;
     }
 
@@ -149,7 +175,19 @@ public class ChessGameManager : MonoBehaviour
 
         if (dx != dy) return false;
 
-        // TODO plus tard : vérifier qu'aucune pièce ne bloque le chemin
+        // Vérifier qu'aucune pièce ne bloque le chemin (diagonale)
+        int stepX = x > piece.boardX ? 1 : -1;
+        int stepY = y > piece.boardY ? 1 : -1;
+
+        int cx = piece.boardX + stepX;
+        int cy = piece.boardY + stepY;
+        while (cx != x || cy != y)
+        {
+            if (board[cx, cy] != null) return false;
+            cx += stepX;
+            cy += stepY;
+        }
+
         return true;
     }
 
